@@ -84,15 +84,14 @@ button:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:2px so
 
 /* ───── Capa de menús ───── */
 #ov{position:absolute;inset:0;display:none;overflow-y:auto;overflow-x:hidden;z-index:8;
-  padding:calc(env(safe-area-inset-top,0px) + 8px) max(16px,env(safe-area-inset-right,0px)) calc(env(safe-area-inset-bottom,0px) + 8px) max(16px,env(safe-area-inset-left,0px));
+  padding:calc(env(safe-area-inset-top,0px) + 8px) max(16px,3vw,env(safe-area-inset-right,0px)) calc(env(safe-area-inset-bottom,0px) + 8px) max(16px,3vw,env(safe-area-inset-left,0px));
   background:linear-gradient(90deg,rgba(7,24,32,.95),rgba(7,24,32,.82) 55%,rgba(7,24,32,.62));
   backdrop-filter:blur(2px);font-size:clamp(14px,min(2.3vh,4.1vw),21px);touch-action:pan-y}
 #ov.show{display:block}
 #ov.clear{background:linear-gradient(90deg,rgba(7,24,32,.86),rgba(7,24,32,.45) 60%,rgba(7,24,32,.15))}
 #ov.solid{background:var(--deep)}
 #ov::-webkit-scrollbar{width:8px}#ov::-webkit-scrollbar-thumb{background:var(--contour)}
-.scr.wide{width:min(100%,86em)}
-.scr{width:min(100%,62em);margin:0 auto;display:flex;flex-direction:column;gap:1.05em;padding-block:clamp(12px,3vh,34px)}
+.scr{width:min(100%,68em);margin:0 auto;display:flex;flex-direction:column;gap:1.05em;padding-block:clamp(12px,3vh,34px)}
 .topbar{display:flex;align-items:flex-end;gap:.8em;border-bottom:1px solid var(--contour);padding-bottom:.55em;flex-wrap:wrap}
 .topbar h2{font:900 clamp(32px,6.4vh,66px)/.88 var(--display);letter-spacing:.015em;text-transform:uppercase;color:var(--bone);flex:1;min-width:0;text-wrap:balance}
 .topbar h2 small{display:block;font:500 .22em var(--mono);letter-spacing:.2em;color:var(--signal);margin-bottom:.55em}
@@ -342,8 +341,8 @@ svg.mini{width:100%;max-width:220px;height:auto;display:block}
 .fleetline .cells{display:flex;gap:3px}.fleetline .cells i{width:clamp(18px,2.2vw,28px);aspect-ratio:1;background:#a9b6bb;border:1px solid var(--bone)}
 .fleetline .cells i:first-child{border-radius:40% 4px 4px 40%}.fleetline .cells i:last-child{border-radius:4px 50% 50% 4px}
 .fleetline b{font:700 .95em var(--ui);color:var(--bone)}.fleetline span{font:500 .72em var(--mono);color:var(--mist)}
-.kbwrap{overflow-x:auto;margin-inline:calc(-1 * var(--gx));padding-inline:var(--gx);padding-bottom:4px}
-svg.kb{width:100%;min-width:600px;height:auto;display:block;max-width:1100px;margin:0 auto}
+.kbwrap{flex:none;overflow-x:auto;overflow-y:hidden;margin-inline:calc(-1 * var(--gx));padding-inline:var(--gx);padding-bottom:4px}
+svg.kb{width:min(100%,1100px);min-width:600px;height:auto;display:block;margin:0 auto}
 svg.kb .k rect,svg.kb .k path{fill:rgba(7,24,32,.7);stroke:rgba(147,174,184,.35);stroke-width:1.2}
 svg.kb .k text{fill:rgba(147,174,184,.55);font-family:var(--mono);font-weight:600}
 svg.kb .k.on rect,svg.kb .k.on path{fill:var(--kc);stroke:var(--kc);filter:drop-shadow(0 3px 0 rgba(0,0,0,.5))}
@@ -354,7 +353,7 @@ svg.kb[data-hl="move"] .k[data-g="move"] rect,svg.kb[data-hl="fire"] .k[data-g="
 svg.kb .k.hit rect,svg.kb .k.hit path{animation:khit .5s ease-out}
 @keyframes khit{0%{transform:translateY(3px);fill:#fff}100%{transform:none}}
 svg.kb .k{transform-box:fill-box}
-.plate .hint{font:500 .8em var(--mono);color:var(--signal);min-height:1.4em}
+.plate .hint{font:500 .8em var(--mono);color:var(--signal);min-height:1.4em;text-align:left;align-self:stretch;max-width:none}
 .kleg{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,15em),1fr));gap:.45em 1.2em}
 .kleg li{display:flex;align-items:center;gap:.55em;font:500 .9em var(--ui);color:var(--bone);cursor:default}
 .kleg i{width:1.1em;height:1.1em;background:var(--kc);flex:none;border-radius:3px}
@@ -367,8 +366,18 @@ svg.kb .k{transform-box:fill-box}
 .mtiles>div,.atiles>div,.aitiles>div{display:flex;flex-direction:column;gap:.25em;background:rgba(7,24,32,.5);padding:.75em .8em;min-width:0}
 .mtiles b,.atiles b,.aitiles b{font:700 .95em/1.2 var(--ui);color:var(--bone)}
 .mtiles span,.atiles span,.aitiles span{font:400 .8em/1.35 var(--ui);color:var(--mist)}
-.atiles{grid-template-columns:repeat(auto-fill,minmax(min(100%,7.4em),1fr))}
+.atiles{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:640px){.atiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .atiles>div{align-items:center;text-align:center}
+.chg{display:grid;grid-template-columns:repeat(4,minmax(0,1fr)) auto;gap:.35em;align-items:end}
+.chg .seg{display:flex;flex-direction:column;gap:.35em;min-width:0}
+.chg .seg i{height:.7em;background:rgba(233,239,233,.12);position:relative;overflow:hidden}
+.chg .seg i::after{content:'';position:absolute;inset:0;background:var(--signal);transform-origin:left;animation:chgFill 4.8s calc(var(--d) * .7s) infinite both}
+@keyframes chgFill{0%{transform:scaleX(0)}10%,88%{transform:scaleX(1)}100%{transform:scaleX(0)}}
+.chg .seg span{font:500 .74em/1.25 var(--ui);color:var(--mist)}
+.chg .go{display:flex;align-items:center;gap:.45em;padding-left:.5em;font:600 .8em/1.25 var(--ui);color:var(--signal);max-width:11em}
+@media (max-width:640px){.chg{grid-template-columns:repeat(4,minmax(0,1fr))}.chg .go{grid-column:1/-1;padding:.3em 0 0;max-width:none}}
+@media (prefers-reduced-motion:reduce){.chg .seg i::after{animation:none;transform:none}}
 .charge{display:grid;grid-template-columns:auto 1fr;gap:.35em .8em;align-items:center;font:500 .8em var(--ui);color:var(--mist)}
 .charge i{height:.55em;background:linear-gradient(90deg,var(--signal) var(--w),rgba(233,239,233,.12) var(--w))}
 .formula{display:flex;flex-direction:column;gap:.55em}
@@ -393,6 +402,7 @@ svg.iso{width:1.7em;height:1.7em}
 .lobby .plate{grid-column:auto}
 .lobby .netst,.lobby .how{grid-column:1/-1}
 .lobby .panel{padding-block:0}
+.pinbig:empty{display:none}
 .pinbig{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:.4em;max-width:24em}
 .pinbig i,.pinbig b{aspect-ratio:3/4;display:grid;place-items:center;border:1px solid var(--contour);background:rgba(7,24,32,.6)}
 .pinbig b{font:900 clamp(1.8em,4vw,2.8em)/1 var(--display);color:var(--signal);border-color:var(--signal);animation:pinIn .35s both}
@@ -403,6 +413,16 @@ svg.iso{width:1.7em;height:1.7em}
 .invtx{display:flex;flex-direction:column;gap:.5em;min-width:0}.invtx b{font:700 .95em var(--ui);color:var(--bone)}
 .invtx input.url{font:500 .78em var(--mono);text-transform:none;letter-spacing:0;width:100%;max-width:none;color:var(--mist)}
 .invtx .btn{align-self:flex-start}
+.pinboxes{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:.4em;max-width:24em}
+.pinboxes .pd{width:100%;min-width:0;aspect-ratio:3/4;box-sizing:border-box;text-align:center;font:900 clamp(1.8em,4vw,2.8em)/1 var(--display);color:var(--signal);background:rgba(7,24,32,.7);border:1px solid var(--contour);padding:0;caret-color:var(--signal)}
+.pinboxes .pd:focus{outline:none;border-color:var(--signal);box-shadow:0 0 0 2px rgba(255,201,60,.35)}
+.lobby.pre .lob.who{order:-2}.lobby.pre .lob.join{order:-1;border-color:var(--signal)}
+.lob.who{grid-column:1/-1;flex-direction:row;flex-wrap:wrap;align-items:flex-end;gap:.6em 1.6em}
+.lob.who p{flex:1 1 16em;padding-bottom:.6em}
+.whoname{display:flex;flex-direction:column;gap:.3em;flex:0 1 18em;min-width:0}
+.whoname span{font:600 .85em var(--ui);color:var(--mist)}
+.whoname input{width:100%;max-width:none}
+.whoname input.bad{border-bottom-color:var(--flag)}
 .pinin{font:900 clamp(1.7em,4vw,2.4em)/1 var(--display);letter-spacing:.42em;text-align:center;padding:.3em .2em .3em .6em;background:rgba(7,24,32,.7);border:1px solid var(--contour);color:var(--signal);width:100%;max-width:12em;
   background-image:repeating-linear-gradient(90deg,transparent 0 calc(100%/6 - 1px),rgba(43,95,115,.7) calc(100%/6 - 1px) calc(100%/6))}
 .pinin:focus{outline:2px solid var(--signal);outline-offset:2px}
@@ -2327,7 +2347,8 @@ const KB_GROUPS={
   pow:{c:'#f07a3a',l:'Usar el poder del almirante'},salvo:{c:'#e8492f',l:'Lanzar la salva'},
   visor:{c:'#b28cff',l:'Visor de la IA'},pause:{c:'#93aeb8',l:'Pausa'}};
 const KB_MAP={'1':'ship','2':'ship','3':'ship','4':'ship','5':'ship',R:'rot',E:'pow',F:'salvo',V:'visor',P:'pause',Esc:'pause',Enter:'fire',Espacio:'fire','↑':'move','↓':'move','←':'move','→':'move'};
-const KB_EVT={Escape:'Esc',Enter:'Enter',' ':'Espacio',ArrowUp:'↑',ArrowDown:'↓',ArrowLeft:'←',ArrowRight:'→'};
+const KB_EVT={Escape:'Esc',Enter:'Enter',' ':'Espacio',ArrowUp:'↑',ArrowDown:'↓',ArrowLeft:'←',ArrowRight:'→',Shift:'⇧',Control:'Ctrl',Alt:'Alt',AltGraph:'AltGr',Meta:'Win',OS:'Win',ContextMenu:'Menú',CapsLock:'Bloq',Tab:'Tab',Backspace:'⌫'};
+const KB_NICE={'⇧':'Mayúsculas','⌫':'Retroceso',Bloq:'Bloq Mayús',Win:'Windows / Cmd',Menú:'Menú contextual'};
 function keyboardSvg(){
   const u=40,g=5,rows=[
     [['Esc',1],['1',1],['2',1],['3',1],['4',1],['5',1],['6',1],['7',1],['8',1],['9',1],['0',1],["'",1],['¿',1],['⌫',2]],
@@ -2374,27 +2395,27 @@ function showHelp(){
   const body='<div class="manual">'+
    plate('hero','Hunde la flota enemiga antes de que hundan la tuya','<p class="lead">Cada flota tiene cinco buques, en horizontal o vertical. Pueden tocarse, pero no superponerse.</p>'+fleetLine())+
    plate('step',"Coloca",step1+'<p>Toca la carta para poner cada buque. '+kbd('R')+' lo gira.</p>','1')+
-   plate('step','Dispara',step2+'<p>Elige una casilla de la carta enemiga. Si aciertas, repites.</p>','2')+
+   plate('step','Dispara',step2+'<p>Elige una casilla de la carta enemiga. Si aciertas, vuelves a disparar.</p>','2')+
    plate('step','Hunde',step3+'<p>Cuando aciertas todas sus casillas, el buque se hunde.</p>','3')+
    plate('keys','Teclado','<p class="hint">Pulsa cualquier tecla para ver si el juego la usa.</p><div class="kbwrap">'+keyboardSvg()+'</div>'+
      '<ul class="kleg">'+Object.entries(KB_GROUPS).map(([k,G])=>'<li data-g="'+k+'" style="--kc:'+G.c+'"><i></i>'+G.l+'</li>').join('')+'</ul>'+
      '<div class="touch"><span>'+ic('target')+' Clic o toque: elegir casilla</span><span>'+ic('rotate')+' Clic derecho: girar</span></div>')+
    plate('marks','Marcas de la carta','<div class="legend">'+legend.map(l=>'<div>'+l[1]+'<span>'+l[0]+'</span></div>').join('')+'</div><p>Se distinguen por la forma, no solo por el color.</p>')+
    plate('modes','Misiones','<div class="mtiles">'+MODE_KEYS.map(k=>'<div>'+iso(MODE_ISO[k],'big')+'<b>'+MODES[k].n+'</b><span>'+(MODES[k].short||MODES[k].d)+'</span></div>').join('')+'</div>')+
-   plate('adm','Almirantes','<div class="charge"><span>Acierto</span><i style="--w:25%"></i><span>Hundimiento</span><i style="--w:45%"></i><span>Poder listo</span><i style="--w:100%"></i></div>'+
+   plate('adm','Almirantes','<p>Cada almirante tiene un poder. Se carga solo mientras aciertas:</p><div class="chg" aria-label="Cuatro aciertos llenan el poder">'+[1,2,3,4].map(k=>'<div class="seg" style="--d:'+k+'"><i></i><span>'+(k===4?'Acierto 4 → 100%':'Acierto '+k+' → '+k*25+'%')+'</span></div>').join('')+'<div class="go">'+kbd('E')+'<span>Poder listo: pulsa E o su botón</span></div></div>'+
      '<div class="atiles">'+ADM.map(a=>'<div>'+admTag(a.id,'width:2.6em;height:3em')+'<b style="color:'+a.col+'">'+a.n+'</b><span>'+a.pn+'</span></div>').join('')+'</div>')+
-   plate('pts','Puntos y perlas','<div class="formula"><div><b>+100</b><span>por impacto, ×1,25 por cada acierto seguido</span></div><div><b>+320</b><span>o más, al hundir un buque</span></div><div><b>+1000</b><span>al ganar, más bonus por precisión</span></div><div class="eq">'+ic('pearl')+'<span>Todo se convierte en perlas para el Arsenal</span></div></div>')+
+   plate('pts','Puntos y perlas','<div class="formula"><div><b>+100</b><span>por impacto, y un 25% más por cada acierto seguido</span></div><div><b>+320</b><span>o más, al hundir un buque</span></div><div><b>+1000</b><span>al ganar (más en Difícil), con bonus por precisión</span></div><div class="eq">'+ic('pearl')+'<span>Todo se convierte en perlas para el Arsenal</span></div></div>')+
    plate('ai','Rivales','<div class="aitiles"><div>'+heat((x,y)=>((x*7+y*13)%5===0)?.5:0)+'<b>Fácil</b><span>Dispara casi al azar</span></div><div>'+heat((x,y)=>(x+y)%2?0:.45+.1*((x*y)%3))+'<b>Normal</b><span>Busca en damero y remata</span></div><div>'+heat((x,y)=>Math.max(0,1-Math.hypot(x-2.5,y-2.8)/3.6))+'<b>Difícil</b><span>Calcula dónde es más probable</span></div></div><p>Nunca mira tu flota. Actívale el visor con '+kbd('V')+'.</p>')+
    '</div>';
-  showOV(screen('Cómo jugar','Manual del oficial',body).replace('class="scr"','class="scr wide"'));
+  showOV(screen('Cómo jugar','Manual del oficial',body));
 }
 /* Teclado vivo: en el manual, las teclas pulsadas se iluminan */
 document.addEventListener('keydown',e=>{
   if(UI.screen!=='help'||!ovOpen())return;const svg=OV.querySelector('svg.kb');if(!svg)return;
-  const name=KB_EVT[e.key]||(e.key.length===1?e.key.toUpperCase():e.key);
+  const name=KB_EVT[e.key]||(e.key.length===1?e.key.toUpperCase():e.key);if(['Tab','Backspace','Shift','Control','Alt','AltGraph','Meta','ContextMenu','CapsLock'].includes(e.key)&&UI.screen==='help')e.preventDefault();
   svg.querySelectorAll('g.k').forEach(g=>{if(g.dataset.k===name){g.classList.remove('hit');void g.getBBox();g.classList.add('hit')}});
   const gid=KB_MAP[name],tip=OV.querySelector('.plate.keys .hint');
-  if(tip)tip.innerHTML=gid?'<b style="color:'+KB_GROUPS[gid].c+'">'+esc(name)+'</b> · '+KB_GROUPS[gid].l:esc(name)+' · esta tecla no tiene uso en el juego';
+  const nice=KB_NICE[name]||name;if(tip)tip.innerHTML=gid?'<b style="color:'+KB_GROUPS[gid].c+'">'+esc(nice)+'</b> · '+KB_GROUPS[gid].l:esc(nice)+' · esta tecla no se usa en el juego';
 });
 OV.addEventListener('pointerover',e=>{const li=e.target.closest&&e.target.closest('.kleg li');const svg=OV.querySelector('svg.kb');if(svg)svg.dataset.hl=li?li.dataset.g:''});
 function qrSvg(txt){try{const q=qrcode(0,'M');q.addData(txt);q.make();return q.createSvgTag({cellSize:8,margin:0,scalable:true})}catch(e){return ''}}
@@ -2443,7 +2464,7 @@ function showResults(r){
     '<div class="row" style="margin-top:.8em"><span class="pill lm">Puesto #'+r.rank+'</span><span class="pill am">'+ic('pearl')+' +'+r.pearls+' perlas</span><span class="pill">'+fmtT(g.time)+'</span>'+(duel?'':'<span class="pill pk">Rival: '+esc(g.players[1].name)+'</span>')+(stars?'<span class="stars" aria-label="'+stars+' de 3 estrellas">'+'★'.repeat(stars)+'<span style="opacity:.25">'+'★'.repeat(3-stars)+'</span></span>':'')+'</div></div>'+
     '<div class="stamp '+stamp[2]+'">'+stamp[0]+'<small>'+esc(stamp[1])+'</small></div></div>'+
     (duel?'<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,18em),1fr))">'+card(g.players[0])+card(g.players[1])+'</div>':card(me))+((newA||newH)?'<div class="grid g2">'+newA+newH+'</div>':'')+
-    '<div class="row"><button class="btn main" data-act="again" data-focus>'+ic('retry')+' Revancha</button><button class="btn" data-act="viewboards">'+ic('eye')+' Ver tableros</button><button class="btn" data-act="replay">'+ic('film')+' Repetición</button><button class="btn sm" data-act="play">Otra misión</button><button class="btn sm" data-act="arsenal">'+ic('anchor')+' Arsenal</button><button class="btn sm pk" data-act="tomenu2">'+ic('home')+' Puerto</button></div>';
+    '<div class="row"><button class="btn main" data-act="again" data-focus>'+ic('retry')+' Revancha</button><button class="btn" data-act="viewboards">'+ic('eye')+' Ver tableros</button><button class="btn" data-act="replay">'+ic('film')+' Repetición</button>'+(g.online?'':'<button class="btn" data-act="play">'+ic('ship')+' Otra misión</button>')+'<button class="btn" data-act="arsenal">'+ic('anchor')+' Arsenal</button><button class="btn pk" data-act="tomenu2">'+ic('home')+' '+(g.online?'Salir de la sala':'Puerto')+'</button></div>';
   showOV(screen('Parte de batalla','Informe Nº '+String(SV.st.games).padStart(4,'0'),body,right,true));
   if(r.newAdm.length||r.newAch.length)setTimeout(()=>sfx('unlock'),500);
 }
@@ -2751,27 +2772,44 @@ function showOnline(prefill){
   const how=kind==='room'?'La partida viaja por la sala de este artifact en Claude: los dos necesitan abrirlo con su sesión iniciada. Para jugar sin cuenta de Claude, usen la versión publicada en la web.'
     :kind==='peer'?(web?'Conexión directa entre los dos navegadores (WebRTC), sin cuentas ni registro. Los dos solo necesitan internet y abrir esta misma página.':'Conexión directa entre los dos navegadores (WebRTC), sin cuentas. Los dos necesitan internet y este mismo archivo, versión 4.')
     :'Esta copia del juego no tiene el módulo de red disponible.';
-  const body='<div class="lobby">'+
+  const body='<div class="lobby'+(prefill?' pre':'')+'">'+
+   '<section class="plate lob who"><label class="whoname"><span>Tu nombre en la partida</span><input type="text" id="netname" maxlength="12" autocomplete="nickname" spellcheck="false" placeholder="Tu nombre" value="'+esc(SV.name||'')+'"></label><p>Así te verá tu amigo en su pantalla. Se guarda para la próxima vez.</p></section>'+
    '<section class="plate lob host"><h4>Crear sala</h4><p>Abre una sala y comparte el PIN con tu amigo.</p>'+
      '<div class="panel">'+sw('n_pow',UI.netPowers,'Poderes de almirante','Cada uno juega con su almirante')+sw('n_rep',UI.netRepeat,'Si aciertas, vuelves a disparar')+'</div>'+
-     '<div class="pinbig" id="netpin" aria-live="polite">'+(NET.role==='host'&&NET.pin&&NET.status!=='off'&&NET.status!=='err'?pinDigits(NET.pin):'<i></i><i></i><i></i><i></i><i></i><i></i>')+'</div>'+
+     '<div class="pinbig" id="netpin" aria-live="polite">'+(NET.role==='host'&&NET.pin&&NET.status!=='off'&&NET.status!=='err'?pinDigits(NET.pin):'')+'</div>'+
      '<div class="netinv" id="netinv"></div><button class="btn main" data-act="nethost"'+(kind?'':' disabled')+'>'+iso('online')+' Crear sala</button></section>'+
    '<section class="plate lob join"><h4>Unirse con PIN</h4><p>Escribe los seis números que te pasó tu amigo.</p>'+
-     '<input id="pinin" class="pinin" inputmode="numeric" autocomplete="off" maxlength="6" pattern="[0-9]*" placeholder="······" aria-label="PIN de la sala" value="'+esc(prefill||'')+'">'+
+     '<div class="pinboxes" id="pinin" role="group" aria-label="PIN de la sala">'+[1,2,3,4,5,6].map(k=>'<input class="pd" inputmode="numeric" autocomplete="one-time-code" maxlength="1" aria-label="Número '+k+' del PIN">').join('')+'</div>'+
      '<button class="btn main" data-act="netjoin"'+(kind?'':' disabled')+'>'+iso('zarpar')+' Unirse</button></section>'+
    '<div class="netst '+(NET.status||'off')+'" id="netst" role="status"><i></i><span>'+({off:'Sin conectar',wait:'Esperando a tu rival',ok:'Conectado',conn:'Conectando',err:'Sin conectar',lost:'Conexión perdida'}[NET.status]||'Sin conectar')+'</span></div>'+
    '<p class="txt how">'+how+' Al terminar, cada navegador revela su flota y el otro comprueba con una huella SHA-256 que nadie movió sus buques.</p></div>';
-  showOV(screen('En línea','Partida con un amigo',body).replace('class="scr"','class="scr wide"'));
+  showOV(screen('En línea','Partida con un amigo',body));
+  const pb=OV.querySelectorAll('#pinin .pd');if(prefill)String(prefill).split('').forEach((d,k)=>{if(pb[k])pb[k].value=d});
+  if(prefill){const n=$('netname');setTimeout(()=>{(n&&!n.value?n:OV.querySelector('[data-act=netjoin]')).focus()},60)}
 }
 Object.assign(ACT,{
   online(){UI.ret=null;showOnline()},
-  async nethost(){audio();sfx('click');UI.netPowers=$('n_pow')?$('n_pow').checked:UI.netPowers;UI.netRepeat=$('n_rep')?$('n_rep').checked:UI.netRepeat;
+  async nethost(){audio();if(!netName())return;sfx('click');UI.netPowers=$('n_pow')?$('n_pow').checked:UI.netPowers;UI.netRepeat=$('n_rep')?$('n_rep').checked:UI.netRepeat;
     const ok=await netOpen(true,newPin());if(ok&&$('netpin')){$('netpin').innerHTML=pinDigits(NET.pin);netShowInvite()}},
   async netcopy(){const u=netInviteUrl();if(!u)return;try{await navigator.clipboard.writeText(u);toastMsg('Invitación copiada: pégala en el chat de tu amigo','#5fd3a8')}catch(e){const el=$('netlink');if(el){el.select();toastMsg('Selecciona y copia el enlace','#ffc93c')}}},
-  async netjoin(){audio();const v=($('pinin')||{}).value||'';const pin=v.replace(/\D/g,'');if(pin.length!==6){sfx('error');toastMsg('El PIN tiene 6 números','#f0a03a');return}sfx('click');await netOpen(false,pin)},
+  async netjoin(){audio();if(!netName())return;const pin=[...OV.querySelectorAll('#pinin .pd')].map(x=>x.value).join('').replace(/\D/g,'');if(pin.length!==6){sfx('error');toastMsg('El PIN tiene 6 números','#f0a03a');return}sfx('click');await netOpen(false,pin)},
 });
 OV.addEventListener('change',e=>{if(e.target.id==='n_pow')UI.netPowers=e.target.checked;else if(e.target.id==='n_rep')UI.netRepeat=e.target.checked});
-OV.addEventListener('input',e=>{if(e.target.id==='pinin'){const v=e.target.value.replace(/\D/g,'').slice(0,6);if(v!==e.target.value)e.target.value=v}});
+/* Nombre obligatorio antes de enlazar: así nadie aparece como «PILOTO» */
+function netName(){const el=$('netname');if(!el)return true;const nm=(el.value||'').trim().toUpperCase().replace(/[^A-Z0-9ÁÉÍÓÚÑÜ _\-.]/g,'').slice(0,12);
+  if(!nm){sfx('error');el.focus();el.classList.add('bad');toastMsg('Escribe tu nombre para que tu amigo sepa quién eres','#f0a03a');return false}
+  el.classList.remove('bad');el.value=nm;SV.name=nm;saveSV();return true}
+/* PIN en seis casillas: avanza solo, retrocede con borrar y acepta pegar el PIN completo */
+const pinBoxes=()=>[...OV.querySelectorAll('#pinin .pd')];
+OV.addEventListener('input',e=>{if(!e.target.classList.contains('pd'))return;const bx=pinBoxes(),k=bx.indexOf(e.target),d=e.target.value.replace(/\D/g,'');
+  if(d.length>1){d.slice(0,6-k).split('').forEach((c,j)=>{bx[k+j].value=c});(bx[Math.min(5,k+d.length)]||e.target).focus();return}
+  e.target.value=d;if(d&&bx[k+1])bx[k+1].focus()});
+OV.addEventListener('keydown',e=>{if(!e.target.classList||!e.target.classList.contains('pd'))return;const bx=pinBoxes(),k=bx.indexOf(e.target);
+  if(e.key==='Backspace'&&!e.target.value&&bx[k-1]){bx[k-1].value='';bx[k-1].focus();e.preventDefault()}
+  else if(e.key==='ArrowLeft'&&bx[k-1]){bx[k-1].focus();e.preventDefault()}else if(e.key==='ArrowRight'&&bx[k+1]){bx[k+1].focus();e.preventDefault()}
+  else if(e.key==='Enter'){e.preventDefault();ACT.netjoin()}});
+OV.addEventListener('paste',e=>{if(!e.target.classList||!e.target.classList.contains('pd'))return;const d=((e.clipboardData||window.clipboardData).getData('text')||'').replace(/\D/g,'').slice(0,6);if(!d)return;e.preventDefault();const bx=pinBoxes();bx.forEach((b,j)=>b.value=d[j]||'');(bx[Math.min(5,d.length)]||bx[5]).focus()});
+OV.addEventListener('focusin',e=>{if(e.target.classList&&e.target.classList.contains('pd'))e.target.select()});
 /* Enlace con PIN: #sala-123456 abre la pantalla de unirse */
 function netHashJoin(){const m=/^#sala-(\d{6})$/.exec(location.hash||'');if(m){showOnline(m[1]);return true}return false}
 
