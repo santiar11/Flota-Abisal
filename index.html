@@ -2125,7 +2125,8 @@ function renderBar(){
     h+='<div class="dock">'+FLEET.map((f,fi)=>'<button class="shipbtn'+(g.pickFi===fi?' sel':'')+(b.ships[fi]?' done':'')+'" data-bar="ship" data-id="'+fi+'" aria-label="'+f.n+', '+f.size+' casillas"><canvas class="sb" data-fi="'+fi+'"></canvas>'+f.n+'<small>'+(fi+1)+' · '+f.size+' casillas'+(b.ships[fi]?' · listo':'')+'</small></button>').join('')+'</div>';
     h+='<button class="btn sm" data-bar="rotate">'+ic('rotate')+' Girar · '+(g.dir==='h'?'horizontal':'vertical')+'</button>';
     h+='<button class="btn sm" data-bar="random">'+ic('shuffle')+' Al azar</button><button class="btn sm pk" data-bar="clear">'+ic('trash')+' Limpiar</button>';
-    h+='<button class="btn main'+(Engine.allPlaced(b)?'':' off')+'" data-bar="ready">'+ic('anchor')+' Levar anclas</button>';
+    const miss=FLEET.length-b.ships.filter(Boolean).length;
+    h+='<button class="btn main'+(miss?' off':'')+'" data-bar="ready">'+ic('anchor')+(miss?' Faltan '+miss+' buque'+(miss>1?'s':''):' Levar anclas')+'</button>';
     h+='<div class="hint">Toca un buque colocado para moverlo · R o clic derecho: girar · 1–5: elegir buque · flechas + Enter: colocar</div>';
   }else if(g.phase==='wait'){
     h+='<div class="hint" style="flex:1">Tu flota está lista. En cuanto '+esc(g.players[1].name)+' termine de colocar la suya, empieza la batalla.</div>';
