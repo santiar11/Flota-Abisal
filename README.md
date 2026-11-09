@@ -1,11 +1,11 @@
 # Flota Abisal en la web (Vercel)
 
-Esta carpeta es el juego listo para publicar como sitio estático. No necesita servidor propio, base de datos ni cuentas de Claude:
+Esta carpeta es el juego listo para publicar como sitio estático. No necesita servidor propio, ni base de datos:
 el juego en línea conecta a los dos navegadores directamente (WebRTC) y usa el servidor público y gratuito de PeerJS solo para que se encuentren.
 
-## Publicar (elige una opción)
+## Publicación
 
-**A. Desde GitHub (recomendada para el equipo)**
+**A. Desde GitHub**
 1. Crea un repositorio y sube esta carpeta (`index.html` y `vercel.json`).
 2. En vercel.com, entra con tu cuenta de GitHub → **Add New… → Project** → importa el repositorio.
 3. Framework Preset: **Other**. No hace falta comando de build. Pulsa **Deploy**.
